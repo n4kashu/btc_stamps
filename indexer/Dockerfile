@@ -26,7 +26,6 @@ RUN pip install --upgrade pip && \
 # Copy the pyproject.toml (and optionally poetry.lock) to /usr/src/app
 COPY pyproject.toml poetry.lock* /usr/src/app/
 
-
 # Copy the application source code into the container
 COPY src ./src
 COPY *.py ./
@@ -40,5 +39,5 @@ RUN poetry install --no-dev
 # RUN useradd -m indexer
 # USER indexer
 
-# Command to run the application
-CMD ["poetry", "run", "indexer"]
+# Command to install dependencies and run the application
+CMD ["sh", "-c", "poetry install --no-dev && poetry run indexer"]
